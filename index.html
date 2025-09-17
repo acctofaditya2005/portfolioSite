@@ -18,8 +18,14 @@
       padding: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    h1, h2 {
+    h1 {
       color: #333;
+      font-style: italic;
+      text-transform: uppercase;
+    }
+    h2 {
+      color: #444;
+      margin-top: 30px;
     }
     .contact {
       font-size: 0.95em;
@@ -31,6 +37,22 @@
     }
     .section {
       margin-bottom: 30px;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
   </style>
 </head>
@@ -67,6 +89,54 @@
         <li><strong>Languages:</strong> Fluent in English, Hindi, Gujarati | Basic in Panjabi, Spanish, Pashto</li>
       </ul>
     </div>
+
+    <div class="section">
+      <h2>Download My Resume</h2>
+      <a href="Aditya_Patadiya_Resume.pdf" download>
+        <button>Download PDF</button>
+      </a>
+    </div>
+
+    <div class="section">
+      <h2>Ask AdityaBot</h2>
+      <input type="text" id="userInput" placeholder="Ask me a question..." />
+      <button onclick="respond()">Send</button>
+      <p id="botResponse"></p>
+
+      <script>
+        function respond() {
+          const input = document.getElementById("userInput").value.toLowerCase();
+          let response = "I'm not sure how to answer that yet.";
+
+          if (input.includes("skills")) {
+            response = "I know Java, Python, SQL, and C!";
+          } else if (input.includes("education")) {
+            response = "I studied Computer Science at GMU and NOVA.";
+          } else if (input.includes("contact")) {
+            response = "You can reach me at acctofaditya2005@gmail.com.";
+          }
+
+          document.getElementById("botResponse").innerText = response;
+        }
+      </script>
+    </div>
+
+    <div class="section">
+      <h2>Contact Me</h2>
+      <form action="mailto:acctofaditya2005@gmail.com" method="post" enctype="text/plain">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name">
+
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email">
+
+        <label for="message">Message:</label>
+        <textarea name="message" rows="4" cols="40"></textarea>
+
+        <input type="submit" value="Send">
+      </form>
+    </div>
   </div>
 </body>
 </html>
+
