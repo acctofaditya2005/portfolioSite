@@ -6,10 +6,11 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      background-color: #434242; /* ← Dark grey */
       margin: 0;
       padding: 20px;
       line-height: 1.6;
+      color: #000000;
     }
     .container {
       max-width: 800px;
@@ -54,27 +55,63 @@
       border: 1px solid #ccc;
       border-radius: 4px;
     }
+
+    /* Floating AdityaBot Button */
+    #chatToggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    /* Chatbot Popup */
+    #chatBox {
+      display: none;
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 300px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      padding: 15px;
+      z-index: 999;
+    }
+    #chatBox input {
+      width: calc(100% - 70px);
+      margin-right: 5px;
+    }
+    #chatBox button {
+      width: 60px;
+      background-color: #007acc;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Aditya Patadiya</h1>
     <div class="contact">
-      US Citizen | <a href="mailto:acctofaditya2005@gmail.com">acctofaditya2005@gmail.com</a> | (571)-662-9019
+      US Citizen | <a href="mailto:acctofaditya2005@gmail.com">acctofaditya2005@gmail.com</a> | (571)-662-9019 | <a href="#">LinkedIn</a>
     </div>
 
     <div class="section">
       <h2>Objective</h2>
-      <p>To pursue opportunities in software development, cybersecurity, or IT support where I can apply my technical skills and passion for learning.</p>
+      <p>Computer Science student with a strong foundation in programming, cybersecurity, and cloud technologies, pursuing a B.S. at George Mason University. Experienced in designing modular, scalable web tools including a self-training chatbot powered by Airtable and JavaScript. Skilled in Java, Python, SQL, and C, with hands-on exposure to AWS, Wireshark, and GitHub. Seeking internship or entry-level opportunities in AI, machine learning, or cloud development to apply technical skills, expand real-world experience, and contribute to innovative, data-driven solutions.</p>
     </div>
 
     <div class="section">
       <h2>Education</h2>
       <ul>
-        <li><strong>George Mason University – Fairfax</strong><br>
-        B.S. in Computer Science – Expected Graduation: June 2027</li>
-        <li><strong>Northern Virginia Community College – Loudoun Campus</strong><br>
-        A.S. in Computer Science – Graduated: August 2025</li>
+        <li><strong>George Mason University – Fairfax</strong><br>B.S. in Computer Science – Expected Graduation: June 2027</li>
+        <li><strong>Northern Virginia Community College – Loudoun Campus</strong><br>A.S. in Computer Science – Graduated: August 2025</li>
         <li><strong>Coursework:</strong> Data Structures & Algorithms, Object-Oriented Programming, Cybersecurity Operations, Technical Drawing & Design</li>
       </ul>
     </div>
@@ -84,41 +121,21 @@
       <ul>
         <li><strong>Programming:</strong> Java, Python, SQL, C</li>
         <li><strong>Certifications:</strong> CompTIA ITF+, AWS Cloud Practitioner (in progress), Microsoft 365</li>
-        <li><strong>Tools:</strong> AWS, Wireshark, Eclipse, Visual Studio, Photoshop, Git/GitHub</li>
+        <li><strong>Tools:</strong> AWS, Wireshark, Eclipse, Visual Studio, Photoshop, Git/GitHub, Airtable</li>
         <li><strong>Operating Systems:</strong> Windows, macOS, Linux (Kali)</li>
         <li><strong>Languages:</strong> Fluent in English, Hindi, Gujarati | Basic in Panjabi, Spanish, Pashto</li>
       </ul>
     </div>
 
     <div class="section">
-      <h2>Download My Resume</h2>
-      <a href="Aditya_Patadiya_Resume.pdf" download>
-        <button>Download PDF</button>
-      </a>
-    </div>
-
-    <div class="section">
-      <h2>Ask AdityaBot</h2>
-      <input type="text" id="userInput" placeholder="Ask me a question..." />
-      <button onclick="respond()">Send</button>
-      <p id="botResponse"></p>
-
-      <script>
-        function respond() {
-          const input = document.getElementById("userInput").value.toLowerCase();
-          let response = "I'm not sure how to answer that yet.";
-
-          if (input.includes("skills")) {
-            response = "I know Java, Python, SQL, and C!";
-          } else if (input.includes("education")) {
-            response = "I studied Computer Science at GMU and NOVA.";
-          } else if (input.includes("contact")) {
-            response = "You can reach me at acctofaditya2005@gmail.com.";
-          }
-
-          document.getElementById("botResponse").innerText = response;
-        }
-      </script>
+      <h2>Projects</h2>
+      <ul>
+        <li>Designed and deployed a modular chatbot for personal portfolio using HTML, JavaScript, and Airtable</li>
+        <li>Implemented dynamic response logic that pulls answers from a live Airtable database</li>
+        <li>Built a scalable knowledge base to simulate client use cases (e.g., Family Guard 360)</li>
+        <li>Developed fallback handling and logging system for unmatched queries</li>
+        <li>Showcased chatbot on personal website to highlight technical versatility</li>
+      </ul>
     </div>
 
     <div class="section">
@@ -126,17 +143,51 @@
       <form action="mailto:acctofaditya2005@gmail.com" method="post" enctype="text/plain">
         <label for="name">Name:</label>
         <input type="text" name="name" id="name">
-
         <label for="email">Email:</label>
         <input type="text" name="email" id="email">
-
         <label for="message">Message:</label>
         <textarea name="message" rows="4" cols="40"></textarea>
-
         <input type="submit" value="Send">
       </form>
     </div>
   </div>
+
+  <!-- Floating AdityaBot Button -->
+  <button id="chatToggle">AdityaBot</button>
+
+  <!-- Chatbot Popup -->
+  <div id="chatBox">
+    <input type="text" id="userInput" placeholder="Ask me something..." />
+    <button onclick="respond()">Send</button>
+    <p id="botResponse"></p>
+  </div>
+
+  <script>
+    // Toggle chatbot visibility
+    document.getElementById("chatToggle").onclick = function() {
+      const chatBox = document.getElementById("chatBox");
+      chatBox.style.display = chatBox.style.display === "none" ? "block" : "none";
+    };
+
+    // Basic chatbot logic
+    function respond() {
+      const input = document.getElementById("userInput").value.toLowerCase();
+      let response = "I'm not sure how to answer that yet.";
+
+      if (input.includes("skills")) {
+        response = "I know Java, Python, SQL, and C!";
+      } else if (input.includes("education")) {
+        response = "I studied Computer Science at GMU and NOVA.";
+      } else if (input.includes("contact")) {
+        response = "You can reach me at acctofaditya2005@gmail.com.";
+      } else if (input.includes("language")) {
+        response = "I speak English, Hindi, Gujarati, and have basic knowledge of Panjabi, Spanish, and Pashto.";
+      } else if (input.includes("projects")) {
+        response = "I built a modular chatbot using HTML, JavaScript, and Airtable with fallback logic and logging.";
+      }
+
+      document.getElementById("botResponse").innerText = response;
+    }
+  </script>
 </body>
 </html>
-
